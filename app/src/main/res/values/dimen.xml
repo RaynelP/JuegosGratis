@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margenIzquierdaListaBotones">25dp</dimen>
+
+    <dimen name="sizeTituloCardsDetallesDeJuego">25sp</dimen>
+    <dimen name="sizeTitulosContenidoCardsDetalleDejuego">18sp</dimen>
+    <dimen name="sizeContenidoCardsDetalleDejuego">16sp</dimen>
+
+    <dimen name="alturaImagen">250dp</dimen>
+    <dimen name="margenSuperiorImagen">8dp</dimen>
+    <dimen name="paddingsCards">16dp</dimen>
+    <dimen name="elevacionCard">8dp</dimen>
+    <dimen name="cornerCard">8dp</dimen>
+
+</resources>

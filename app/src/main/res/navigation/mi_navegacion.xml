@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mi_navegacion"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.juegosgratis.view.principal.HomeFragment"
+        android:label="Inicio" >
+
+        <action
+            android:id="@+id/action_homeFragment_to_gamesListFragment"
+            app:destination="@id/gamesListFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/slide_out_right" />
+
+        <action
+            android:id="@+id/action_homeFragment_to_fragment_JuegoEnDetalle"
+            app:destination="@id/fragment_JuegoEnDetalle" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.example.juegosgratis.view.principal.FavoriteFragment"
+        android:label="Favoritos" >
+
+        <action
+            android:id="@+id/action_favoriteFragment_to_fragment_JuegoEnDetalle"
+            app:destination="@id/fragment_JuegoEnDetalle" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/gamesListFragment"
+        android:name="com.example.juegosgratis.view.gameList.GamesListFragment"
+        android:label="Games" >
+
+        <action
+            android:id="@+id/action_gamesListFragment_to_fragment_JuegoEnDetalle"
+            app:destination="@id/fragment_JuegoEnDetalle" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_JuegoEnDetalle"
+        android:name="com.example.juegosgratis.view.gameDetail.GameDetailFragment"
+        android:label="" />
+
+</navigation>

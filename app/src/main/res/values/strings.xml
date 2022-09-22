@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">JuegosGratis</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="cardGenero">Gender:</string>
+    <string name="cardPlataforma">Platform:</string>
+    <string name="cardDescripcion">Short Description:</string>
+
+    <string name="elementosEncontrados">elementos encontrados</string>
+    <string name="texto_agregados_a_favoritos">Agregados a favoritos</string>
+    <string name="item_inicio">Inicio</string>
+    <string name="item_buscar">Buscar</string>
+    <string name="item_favoritos">Favoritos</string>
+    <string name="description">Description</string>
+</resources>
