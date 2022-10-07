@@ -9,5 +9,5 @@ Lenguajes usados: JAVA
 *DataBinding 
 *ViewPager 
 *RecyclerView 
-*SqLite (para guardar peliculas en favoritos a nivel local) 
+*SqLite (para guardar Juegos en favoritos a nivel local) 
 *Uso Retrofit para consumir los dato
