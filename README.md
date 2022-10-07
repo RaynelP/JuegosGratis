@@ -1,5 +1,5 @@
 # JuegosGratis
-App Android demostrativa que consume una API de juegos gratis usando el JAVA para diferentes plataformas con Retrofit.
+App Android demostrativa que consume una API de juegos gratis usando el JAVA, MVVM Y DataBinding para diferentes plataformas con Retrofit.
 
 Lenguajes usados: JAVA
 
