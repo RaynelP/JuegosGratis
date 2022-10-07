@@ -3,7 +3,6 @@ package com.example.juegosgratis.view.gameList;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +13,7 @@ import com.example.juegosgratis.repository.network.Interfaces.IFavoriteRepositor
 import com.example.juegosgratis.repository.network.Interfaces.IGameRepository;
 import com.example.juegosgratis.repository.network.implementations.GameRepositoryRetrofit;
 import com.example.juegosgratis.util.UtilNavigate;
-import com.example.juegosgratis.view.adapters.GameListAdapter;
+import com.example.juegosgratis.view.MainActivity;
 import com.example.juegosgratis.viewModel.GameListViewModel;
 import com.example.juegosgratis.model.game.Game;
 import com.example.juegosgratis.viewModel.GameListViewModelFactory;
@@ -70,10 +69,26 @@ public class GamesListFragment extends Fragment{
         viewModel.getGamesList().observe(getViewLifecycleOwner(),
                 games -> loadList(games)
         );
+
+        viewModel.getIsLoading().observe(getViewLifecycleOwner(), isLoading -> {
+            if(isLoading != null){
+                MainActivity activity = (MainActivity) requireActivity();
+                if(isLoading){
+                    activity.doShowProgress();
+                }else{
+                    activity.doneShowProgress();
+                }
+            }
+        });
+
     }
 
     private void loadList(List<Game> gameList){
-        gameListAdapter = new GameListAdapter();
+        gameListAdapter = new GameListAdapter(
+                FuenteDeDatosFavoritosYVistos
+                        .instanciar(getContext())
+                        .getAllGames()
+        );
         gameListAdapter.setGamesList(gameList);
         binding.rvListaDeJuegos.setAdapter(gameListAdapter);
     }

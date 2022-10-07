@@ -12,11 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.JuegosGratis">
 
-        <activity android:name=".view.JuegosActivity"
-            android:theme="@style/TemaSinActionBar">
-
-        </activity>
-
         <activity android:name=".view.MainActivity"
             android:exported="true">
             <intent-filter>

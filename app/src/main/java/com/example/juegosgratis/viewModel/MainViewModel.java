@@ -9,11 +9,12 @@ import com.example.juegosgratis.repository.network.Interfaces.IGameRepository;
 import com.example.juegosgratis.repository.network.implementations.GameRepositoryRetrofit;
 import com.example.juegosgratis.model.GameConstans;
 import com.example.juegosgratis.model.game.Game;
+import com.example.juegosgratis.util.GenericViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainViewModel extends ViewModel {
+public class MainViewModel extends GenericViewModel {
 
     private final IGameRepository gamesRepository;
     private final MutableLiveData<List<Game>> popularGamesList = new MutableLiveData<>();
@@ -74,10 +75,6 @@ public class MainViewModel extends ViewModel {
         return navigateToPopularGamesList;
     }
 
-    public LiveData<Boolean> getError() {
-        return error;
-    }
-
     public void doNavigateToGamesListPopulars(){
         navigateToPopularGamesList.postValue(true);
     }
@@ -91,6 +88,7 @@ public class MainViewModel extends ViewModel {
             error.postValue(true);
         }
     }
+
     public void retry(){
         getAllGames();
         getPopularGamesList();

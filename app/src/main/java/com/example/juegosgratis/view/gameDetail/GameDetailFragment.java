@@ -14,6 +14,7 @@ import com.example.juegosgratis.model.game.ScreenShot;
 import com.example.juegosgratis.repository.network.Interfaces.IGameRepository;
 import com.example.juegosgratis.repository.network.implementations.GameRepositoryRetrofit;
 import com.example.juegosgratis.util.UtilNavigate;
+import com.example.juegosgratis.view.MainActivity;
 import com.example.juegosgratis.viewModel.GameDetailsViewModel;
 import com.example.juegosgratis.viewModel.GameDetailsViewModelFactory;
 import com.example.juegosgratis.model.game.GameDetail;
@@ -61,6 +62,16 @@ public class GameDetailFragment extends Fragment implements View.OnClickListener
             }
         });
 
+        viewModel.getIsLoading().observe(getViewLifecycleOwner(), isLoading -> {
+            if(isLoading != null){
+                MainActivity activity = (MainActivity) requireActivity();
+                if(isLoading){
+                    activity.doShowProgress();
+                }else{
+                    activity.doneShowProgress();
+                }
+            }
+        });
     }
 
     private void configVistas(GameDetail fullGame) {

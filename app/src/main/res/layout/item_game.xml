@@ -8,6 +8,10 @@
             type="com.example.juegosgratis.model.game.Game" />
 
         <variable
+            name="isFavorite"
+            type="Boolean" />
+
+        <variable
             name="onClickListener"
             type="com.example.juegosgratis.view.adapters.genericAdapter.OnclickItemListener&lt;com.example.juegosgratis.model.game.Game&gt;" />
     </data>

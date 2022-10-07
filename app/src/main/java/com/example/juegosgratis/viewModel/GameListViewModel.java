@@ -9,12 +9,13 @@ import com.example.juegosgratis.repository.network.Interfaces.IFavoriteRepositor
 import com.example.juegosgratis.repository.network.Interfaces.IGameRepository;
 import com.example.juegosgratis.model.game.Game;
 import com.example.juegosgratis.model.game.GameFavorite;
+import com.example.juegosgratis.util.GenericViewModel;
 import com.example.juegosgratis.util.UtilNavigate;
 import com.example.juegosgratis.view.MainActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameListViewModel extends ViewModel {
+public class GameListViewModel extends GenericViewModel {
 
     private final IGameRepository gameRepository;
     private final IFavoriteRepository favoriteRepository;
@@ -54,6 +55,7 @@ public class GameListViewModel extends ViewModel {
 
 
     public void loadAllGames(){
+        onLoanding();
         try {
             List<Game> list = new ExecuterThread(gameRepository)
                     .obtenerTodosLosJuegos();
@@ -61,10 +63,11 @@ public class GameListViewModel extends ViewModel {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        doneLoanding();
     }
 
     public void loadGamesByGenre(String genre){
+        onLoanding();
         try {
             List<Game> list = new ExecuterThread(gameRepository)
                     .obtenerJuegosPorCategoria(genre);
@@ -72,9 +75,11 @@ public class GameListViewModel extends ViewModel {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        doneLoanding();
     }
 
     public void loadGamesListByOrder(String order) {
+        onLoanding();
         try {
             List<Game> list = new ExecuterThread(gameRepository)
                     .obtenerJuegosOrdenadosPor(order);
@@ -82,9 +87,11 @@ public class GameListViewModel extends ViewModel {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        doneLoanding();
     }
 
     public void loadGamesListByName(String name) {
+        onLoanding();
         try {
             List<Game> list = new ExecuterThread(gameRepository)
                     .obtenerJuegosPorNombre(name);
@@ -92,6 +99,7 @@ public class GameListViewModel extends ViewModel {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        doneLoanding();
     }
 
     public ArrayList<GameFavorite> loadAllFavoriteGames(){

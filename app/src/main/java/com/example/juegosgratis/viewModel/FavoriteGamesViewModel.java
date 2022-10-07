@@ -40,9 +40,7 @@ public class FavoriteGamesViewModel extends AndroidViewModel {
         try {
             List<GameFavorite> list = new ExecuterThread(favoriteRepository).obtenerJuegosFavoritos();
             favoriteGames.postValue(list);
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
+        } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
     }

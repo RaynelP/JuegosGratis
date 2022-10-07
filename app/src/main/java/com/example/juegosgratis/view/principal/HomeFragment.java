@@ -1,9 +1,11 @@
 package com.example.juegosgratis.view.principal;
 
+import android.opengl.Visibility;
 import android.os.Bundle;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -18,6 +20,7 @@ import com.example.juegosgratis.databinding.ItemImagesBinding;
 import com.example.juegosgratis.databinding.ItemMorePopularGameBinding;
 import com.example.juegosgratis.util.Filtros;
 import com.example.juegosgratis.util.UtilNavigate;
+import com.example.juegosgratis.view.MainActivity;
 import com.example.juegosgratis.view.adapters.genericAdapter.GenericAdapter;
 import com.example.juegosgratis.view.adapters.genericAdapter.holders.HolderGenreBottom;
 import com.example.juegosgratis.view.adapters.genericAdapter.holders.HolderImage;
@@ -79,6 +82,17 @@ public class HomeFragment extends Fragment {
                         R.id.action_homeFragment_to_gamesListFragment,
                         UtilNavigate.instanceBundleToGameList(UtilNavigate.BUSQUEDA_POR_ORDEN, UtilNavigate.FAVORITOS));
                 gameViewModel.doneNavigateToGamesList();
+            }
+        });
+
+        gameViewModel.getIsLoading().observe(getViewLifecycleOwner(), isLoading -> {
+            if(isLoading != null){
+                MainActivity activity = (MainActivity) requireActivity();
+                if(isLoading){
+                    activity.doShowProgress();
+                }else{
+                    activity.doneShowProgress();
+                }
             }
         });
 

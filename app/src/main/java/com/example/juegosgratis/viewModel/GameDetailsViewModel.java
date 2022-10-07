@@ -7,9 +7,10 @@ import androidx.lifecycle.ViewModel;
 import com.example.juegosgratis.model.game.GameDetail;
 import com.example.juegosgratis.repository.ExecuterThread;
 import com.example.juegosgratis.repository.network.Interfaces.IGameRepository;
+import com.example.juegosgratis.util.GenericViewModel;
 
 
-public class GameDetailsViewModel extends ViewModel {
+public class GameDetailsViewModel extends GenericViewModel {
 
     private final IGameRepository gameRepository;
     private final MutableLiveData<GameDetail> gameDetail;

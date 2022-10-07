@@ -65,11 +65,11 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, (Openable) null);
     }
 
-    public void showNavigationBottom(){
-        binding.navigation.setVisibility(View.VISIBLE);
+    public void doShowProgress(){
+        binding.progressBar.setVisibility(View.VISIBLE);
     }
 
-    public void hideNavigationBottom(){
-        binding.navigation.setVisibility(View.GONE);
+    public void doneShowProgress(){
+        binding.progressBar.setVisibility(View.GONE);
     }
 }

@@ -18,7 +18,9 @@
 
         <action
             android:id="@+id/action_homeFragment_to_fragment_JuegoEnDetalle"
-            app:destination="@id/fragment_JuegoEnDetalle" />
+            app:destination="@id/fragment_JuegoEnDetalle"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
 
     </fragment>
 
@@ -29,7 +31,9 @@
 
         <action
             android:id="@+id/action_favoriteFragment_to_fragment_JuegoEnDetalle"
-            app:destination="@id/fragment_JuegoEnDetalle" />
+            app:destination="@id/fragment_JuegoEnDetalle"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
 
     </fragment>
 
@@ -40,7 +44,9 @@
 
         <action
             android:id="@+id/action_gamesListFragment_to_fragment_JuegoEnDetalle"
-            app:destination="@id/fragment_JuegoEnDetalle" />
+            app:destination="@id/fragment_JuegoEnDetalle"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
 
     </fragment>
 

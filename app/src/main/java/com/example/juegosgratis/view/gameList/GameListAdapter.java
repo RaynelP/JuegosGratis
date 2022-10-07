@@ -1,9 +1,11 @@
-package com.example.juegosgratis.view.adapters;
+package com.example.juegosgratis.view.gameList;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.databinding.ViewDataBinding;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -14,6 +16,7 @@ import com.example.juegosgratis.databinding.ItemGameBinding;
 import com.example.juegosgratis.databinding.ItemTextCuantityGamesBinding;
 import com.example.juegosgratis.model.game.Game;
 import com.example.juegosgratis.model.game.GameFavorite;
+import com.example.juegosgratis.repository.localDataBase.FuenteDeDatosFavoritosYVistos;
 import com.example.juegosgratis.util.Busqueda;
 import com.example.juegosgratis.util.UtilNavigate;
 import com.example.juegosgratis.view.adapters.genericAdapter.OnclickItemListener;
@@ -28,7 +31,9 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.GameHo
     private List<GameFavorite> favoriteList;
     private List<Game> gamesList;
 
-    public GameListAdapter() {
+
+    public GameListAdapter(List<GameFavorite> favoriteList) {
+        this.favoriteList = favoriteList;
     }
 
     @Override
@@ -82,6 +87,39 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.GameHo
 
         private ItemGameBinding bindingItem;
         private ItemTextCuantityGamesBinding bindingCount;
+        OnclickItemListener<Game> onClick = new OnclickItemListener<Game>() {
+            @Override
+            public void onClickItem(View v, Game item) {
+                if(v.getId() == R.id.bottomFavorite){
+                    AppCompatImageButton favoriteButton = (AppCompatImageButton) v;
+                    if(bindingItem.getIsFavorite()){
+                        FuenteDeDatosFavoritosYVistos
+                                .instanciar(favoriteButton.getContext()).deleteGame(item.getId());
+                        favoriteButton.setBackground(v.getResources().getDrawable(R.drawable.favorito_off));
+                    }else{
+                        FuenteDeDatosFavoritosYVistos
+                                .instanciar(favoriteButton.getContext())
+                                        .addGame(
+                                                new GameFavorite(
+                                                        item.getThumbnail(),
+                                                        item.getTitle(),
+                                                        item.getId()
+                                                )
+                                        );
+                        favoriteButton.setBackground(v.getResources().getDrawable(R.drawable.favorito_on));
+                    }
+                }else{
+                    NavController navController =
+                            Navigation.findNavController(v);
+
+                    Bundle bundle = new Bundle();
+                    bundle.putInt(UtilNavigate.GAME_ID, item.getId());
+
+                    navController
+                            .navigate(R.id.action_gamesListFragment_to_fragment_JuegoEnDetalle, bundle);
+                }
+            }
+        };
 
         public GameHolder(ViewDataBinding binding) {
             super(binding.getRoot());
@@ -96,6 +134,17 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.GameHo
             Picasso.with(bindingItem.image.getContext())
                     .load(item.getThumbnail()).into(bindingItem.image);
             bindingItem.setGame(item);
+            bindingItem.setOnClickListener(onClick);
+
+            int index = Busqueda.busquedaLineal(favoriteList, item.getId());
+            AppCompatImageButton favoriteButton = bindingItem.bottomFavorite;
+            if(index != -1){
+                bindingItem.setIsFavorite(true);
+                favoriteButton.setBackground(favoriteButton.getResources().getDrawable(R.drawable.favorito_on));
+            }else{
+                bindingItem.setIsFavorite(false);
+                favoriteButton.setBackground(favoriteButton.getResources().getDrawable(R.drawable.favorito_off));
+            }
         }
 
         public void bind() {
@@ -104,45 +153,6 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.GameHo
         }
 
     }
-    static class OnClick implements OnclickItemListener<Game>{
-        @Override
-        public void onClickItem(View v, Game item) {
-            if(v.getId() == R.id.bottomFavorite){
-                //
-            }else{
-                NavController navController =
-                        Navigation.findNavController(v);
 
-                Bundle bundle = new Bundle();
-                bundle.putInt(UtilNavigate.GAME_ID, item.getId());
-
-                navController
-                        .navigate(R.id.action_homeFragment_to_fragment_JuegoEnDetalle, bundle);
-            }
-        }
-    }
 }
-
-        //@Override
-        //public void onClick(View v) {
-        //    int posicion = getAdapterPosition() - 1;
-        //    if(v.getId() == _botonFavorito.getId()){
-        //        Game juego = listaJuegos.get(posicion);
-        //        //si el juego no esta en la lista de favoritos entonces el resultado es -1, si no, el result es el indice
-        //        int indice = Busqueda.busquedaLineal(list, juego.getId());
-        //        if(indice != -1 ){
-        //            eliminarDeFavoritos(juego, indice);
-        //            _botonFavorito.setBackground(fragment.getResources().getDrawable(R.drawable.favorito_off));
-        //            despintarCorazon(_botonFavorito);
-        //        }else{
-        //            agregarAFavoritos(juego);
-        //            pintarCorazon(_botonFavorito);
-        //        }
-        //    }else{
-        //        abrirDetalleJuego(posicion);
-        //    }
-        //}
-
-
-
 
